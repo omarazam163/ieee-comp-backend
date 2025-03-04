@@ -7,8 +7,8 @@ import { GlobalErrorHandler } from "./helpers/globalErrorHandler";
 export const App = express();
 
 App.use(express.json());
-App.use("/user", userRouter);
-App.use("/leaderboard", leaderBoaerdRouter);
+App.use("/api/user", userRouter);
+App.use("/api/leaderboard", leaderBoaerdRouter);
 let port: number = 3000;
 
 App.use(
