@@ -9,12 +9,12 @@ export const App = express();
 App.use(express.json());
 App.use("/api/user", userRouter);
 App.use("/api/leaderboard", leaderBoaerdRouter);
-let port: number = 3000;
+const PORT = process.env.PORT || 3000;
 
 App.use(
     GlobalErrorHandler
 );
 
-App.listen(port, () => {
-  console.log(`server started at http://localhost:${port}`);
+App.listen(PORT, () => {
+  console.log(`server started at http://localhost:${PORT}`);
 });
