@@ -15,6 +15,8 @@ App.use(
     GlobalErrorHandler
 );
 
-App.listen(PORT, () => {
-  console.log(`server started at http://localhost:${PORT}`);
-});
+// App.listen(PORT, () => {
+//   console.log(`server started at http://localhost:${PORT}`);
+// });
+
+export default App;
