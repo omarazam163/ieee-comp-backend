@@ -9,3 +9,4 @@ const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
 exports.apiKey = process.env.API_KEY;
 exports.client = new client_1.PrismaClient();
+//# sourceMappingURL=prismaClient.js.map

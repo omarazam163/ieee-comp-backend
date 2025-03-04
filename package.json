@@ -1,13 +1,13 @@
 {
   "name": "back-end",
   "version": "1.0.0",
-  "main": "dist/app.js",
+  "main": "dist/app.js", 
   "scripts": {
-    "test": "nodemon app.ts",
-    "dev": "vercel dev",
-    "build": "tsc",
-    "start": "node dist/index.js",
-    "postinstall": "prisma generate && prisma migrate deploy"
+  "start": "nodemon src/index.ts",
+  "build": "rimraf dist && tsc",
+  "ts.check": "tsc --project tsconfig.json",
+  "add-build": "git add dist",
+  "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
@@ -16,13 +16,23 @@
     "@prisma/client": "^6.4.1",
     "@types/express": "^5.0.0",
     "@types/jsonwebtoken": "^9.0.9",
-    "@types/knex": "^0.15.2",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "express-validator": "^7.2.1",
     "jsonwebtoken": "^9.0.2",
-    "knex": "^3.1.0",
     "pg": "^8.13.3",
     "prisma": "^6.4.1"
-  }
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.9",
+    "pre-commit": "^1.2.2",
+    "rimraf": "^6.0.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.2"
+  },
+  "pre-commit": [
+      "ts.check",
+      "build",
+      "add-build"
+  ]
 }

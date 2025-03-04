@@ -16,7 +16,6 @@ exports.userController = void 0;
 const express_validator_1 = require("express-validator");
 const prismaClient_1 = require("../models/prismaClient");
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
-const prismaClient_2 = require("../models/prismaClient");
 let AddNewUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const errors = (0, express_validator_1.validationResult)(req);
     if (!errors.isEmpty()) {
@@ -46,7 +45,7 @@ let SignIn = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             email: user.email,
             userName: user.userName,
             name: user.name,
-        }, prismaClient_2.apiKey, {
+        }, prismaClient_1.apiKey, {
             expiresIn: "4days",
         });
         res
@@ -103,3 +102,4 @@ exports.userController = {
     upddateScore,
     GetUserScore,
 };
+//# sourceMappingURL=user.controller.js.map

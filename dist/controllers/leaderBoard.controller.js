@@ -30,3 +30,4 @@ let getLeaderBoard = (req, res) => __awaiter(void 0, void 0, void 0, function* (
     res.status(200).json({ status: 200, data: users }).send();
 });
 exports.leaderBoardController = { getLeaderBoard };
+//# sourceMappingURL=leaderBoard.controller.js.map

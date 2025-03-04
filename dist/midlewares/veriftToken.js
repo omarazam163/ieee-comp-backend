@@ -22,3 +22,4 @@ let verfiyToken = (req, res, next) => {
     }
 };
 exports.verfiyToken = verfiyToken;
+//# sourceMappingURL=veriftToken.js.map

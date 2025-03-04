@@ -5,3 +5,4 @@ const GlobalErrorHandler = (err, req, res, next) => {
     res.status(500).json({ status: 500, message: err.message }).send();
 };
 exports.GlobalErrorHandler = GlobalErrorHandler;
+//# sourceMappingURL=globalErrorHandler.js.map

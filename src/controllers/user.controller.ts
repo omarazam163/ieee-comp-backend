@@ -1,9 +1,8 @@
 import { Request, Response } from "express";
 import { Iuser } from "../models/user.model";
 import { validationResult } from "express-validator";
-import { client } from "../models/prismaClient";
+import { client,apiKey } from "../models/prismaClient";
 import Jwt from "jsonwebtoken";
-import { apiKey } from "../models/prismaClient";
 
 let AddNewUser = async (req: Request, res: Response) => {
   const errors = validationResult(req);

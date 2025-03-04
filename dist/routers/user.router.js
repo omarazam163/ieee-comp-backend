@@ -17,7 +17,14 @@ const uniqueEmail_1 = require("../helpers/uniqueEmail");
 const uniqueUserName_1 = require("../helpers/uniqueUserName");
 const veriftToken_1 = require("../midlewares/veriftToken");
 exports.userRouter = (0, express_1.Router)();
-exports.userRouter.post("/register", (0, express_validator_1.body)("name").exists({ checkFalsy: true }).isLength({ min: 3 }), (0, express_validator_1.body)("email").exists({ checkFalsy: true }).isEmail().custom((email) => __awaiter(void 0, void 0, void 0, function* () { return yield (0, uniqueEmail_1.uniqueEmail)(email); })), ((0, express_validator_1.body)("password").exists({ checkFalsy: true }).isLength({ min: 6 })), (0, express_validator_1.body)("userName").exists({ checkFalsy: true }).isLength({ min: 3 }).custom((userName) => __awaiter(void 0, void 0, void 0, function* () { return yield (0, uniqueUserName_1.uniqueUserName)(userName); })), user_controller_1.userController.AddNewUser);
+exports.userRouter.post("/register", (0, express_validator_1.body)("name").exists({ checkFalsy: true }).isLength({ min: 3 }), (0, express_validator_1.body)("email")
+    .exists({ checkFalsy: true })
+    .isEmail()
+    .custom((email) => __awaiter(void 0, void 0, void 0, function* () { return yield (0, uniqueEmail_1.uniqueEmail)(email); })), (0, express_validator_1.body)("password").exists({ checkFalsy: true }).isLength({ min: 6 }), (0, express_validator_1.body)("userName")
+    .exists({ checkFalsy: true })
+    .isLength({ min: 3 })
+    .custom((userName) => __awaiter(void 0, void 0, void 0, function* () { return yield (0, uniqueUserName_1.uniqueUserName)(userName); })), user_controller_1.userController.AddNewUser);
 exports.userRouter.post("/login", (0, express_validator_1.body)("email").exists({ checkFalsy: true }).isEmail(), (0, express_validator_1.body)("password").exists({ checkFalsy: true }).isLength({ min: 6 }), user_controller_1.userController.SignIn);
 exports.userRouter.get("/getScore/:id", user_controller_1.userController.GetUserScore);
 exports.userRouter.patch("/updatescore", veriftToken_1.verfiyToken, user_controller_1.userController.upddateScore);
+//# sourceMappingURL=user.router.js.map
