@@ -12,22 +12,27 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.leaderBoardController = void 0;
 const prismaClient_1 = require("../models/prismaClient");
 let getLeaderBoard = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    let pageNumber = parseInt(req.params["page"] || '0');
-    let pageSize = 10;
-    let users = yield prismaClient_1.client.user.findMany({
-        take: pageSize,
-        skip: pageNumber * pageSize,
-        orderBy: {
-            score: "desc",
-        },
-        select: {
-            userName: true,
-            name: true,
-            lastUpdated: true,
-            score: true,
-        },
-    });
-    res.status(200).json({ status: 200, data: users }).send();
+    try {
+        let pageNumber = parseInt(req.params["page"] || '0');
+        let pageSize = 10;
+        let users = yield prismaClient_1.client.user.findMany({
+            take: pageSize,
+            skip: pageNumber * pageSize,
+            orderBy: {
+                score: "desc",
+            },
+            select: {
+                userName: true,
+                name: true,
+                lastUpdated: true,
+                score: true,
+            },
+        });
+        res.status(200).json({ status: 200, data: users }).send();
+    }
+    catch (err) {
+        res.status(404).json({ status: 404, message: "page number is required" }).send();
+    }
 });
 exports.leaderBoardController = { getLeaderBoard };
 //# sourceMappingURL=leaderBoard.controller.js.map

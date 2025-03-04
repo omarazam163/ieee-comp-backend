@@ -1,7 +1,8 @@
 import { Request, Response } from "express";
 import { client } from "../models/prismaClient";
 let getLeaderBoard = async (req: Request, res: Response) => {
-    let pageNumber:number = parseInt(req.params["page"]||'0');
+ try{
+        let pageNumber:number = parseInt(req.params["page"]||'0');
     let pageSize= 10;
     let users = await client.user.findMany({
         take:pageSize,
@@ -17,6 +18,11 @@ let getLeaderBoard = async (req: Request, res: Response) => {
         },
     })
     res.status(200).json({ status: 200, data: users }).send();
+ }
+ catch(err)
+ {
+    res.status(404).json({ status: 404, message: "page number is required" }).send();
+ }
 };
 
 
