@@ -109,13 +109,13 @@ const getSpecificDate = (req, res) => __awaiter(void 0, void 0, void 0, function
                     Date: new Date(req.body.date)
                 }
             });
-            yield prismaClient_1.client.userDays.create({
+            const newDay = yield prismaClient_1.client.userDays.create({
                 data: {
                     userId: req.body.user.id,
                     DayId: new Date(req.body.date)
                 },
             });
-            res.status(200).json({ message: "success", data: day });
+            res.status(200).json({ message: "success", data: newDay });
         }
     }
     catch (err) {

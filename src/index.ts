@@ -1,4 +1,4 @@
-import express,{NextFunction, Request,Response} from "express";
+import express,{ Request,Response} from "express";
 import { userRouter } from "./routers/user.router";
 import { leaderBoaerdRouter } from "./routers/leaderBoard.router";
 import { GlobalErrorHandler } from "./helpers/globalErrorHandler";

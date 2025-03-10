@@ -103,13 +103,13 @@ try{
       }
     })
 
-    await client.userDays.create({
+    const newDay =await client.userDays.create({
       data: {
         userId: req.body.user.id,
         DayId:new Date(req.body.date)
       },
     });
-    res.status(200).json({ message: "success", data: day });
+    res.status(200).json({ message: "success", data: newDay });
   }
 }
 catch(err)
