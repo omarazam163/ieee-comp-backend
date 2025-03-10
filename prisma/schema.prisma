@@ -21,4 +21,28 @@ model User{
   score Int @default(0)
   userName String @unique
   lastUpdated DateTime @default(now())
+  UserDays UserDays[]
+  maxStreak Int @default(0)
+  lastPage Int @default(1)
+  readingRate Int @default(10)
 }
+
+model Days{
+  Date DateTime @id @db.Date
+  UserDays UserDays[]
+}
+
+
+model UserDays{
+  user User @relation(fields: [userId],references: [id],onDelete:Cascade)
+  userId String
+  day Days @relation(fields: [DayId],references: [Date],onDelete:Cascade)
+  DayId DateTime @db.Date
+  startPage Int 
+  endPage Int
+  eveningAzkar Boolean @default(false)
+  morningAzkar Boolean @default(false)
+  @@id([userId,DayId])
+}
+
+

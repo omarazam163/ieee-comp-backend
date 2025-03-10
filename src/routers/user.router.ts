@@ -23,11 +23,12 @@ userRouter.post(
 
 userRouter.post(
   "/login",
-  body("email").exists({ checkFalsy: true }).isEmail(),
-  body("password").exists({ checkFalsy: true }).isLength({ min: 6 }),
+  body("email").exists({ values:"falsy" }).withMessage("email is required").isEmail().withMessage("email is required"),
+  body("password").exists({ values:"falsy" }).withMessage("password is required")
+  .isLength({ min: 6 }).withMessage("password is required"),
   userController.SignIn
 );
 
 userRouter.get("/getScore/:id", userController.GetUserScore);
 
-userRouter.patch("/updatescore", verfiyToken, userController.upddateScore);
+userRouter.patch("/updatescore", verfiyToken, userController.updateScore);

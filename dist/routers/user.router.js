@@ -24,7 +24,8 @@ exports.userRouter.post("/register", (0, express_validator_1.body)("name").exist
     .exists({ checkFalsy: true })
     .isLength({ min: 3 })
     .custom((userName) => __awaiter(void 0, void 0, void 0, function* () { return yield (0, uniqueUserName_1.uniqueUserName)(userName); })), user_controller_1.userController.AddNewUser);
-exports.userRouter.post("/login", (0, express_validator_1.body)("email").exists({ checkFalsy: true }).isEmail(), (0, express_validator_1.body)("password").exists({ checkFalsy: true }).isLength({ min: 6 }), user_controller_1.userController.SignIn);
+exports.userRouter.post("/login", (0, express_validator_1.body)("email").exists({ values: "falsy" }).withMessage("email is required").isEmail().withMessage("email is required"), (0, express_validator_1.body)("password").exists({ values: "falsy" }).withMessage("password is required")
+    .isLength({ min: 6 }).withMessage("password is required"), user_controller_1.userController.SignIn);
 exports.userRouter.get("/getScore/:id", user_controller_1.userController.GetUserScore);
-exports.userRouter.patch("/updatescore", veriftToken_1.verfiyToken, user_controller_1.userController.upddateScore);
+exports.userRouter.patch("/updatescore", veriftToken_1.verfiyToken, user_controller_1.userController.updateScore);
 //# sourceMappingURL=user.router.js.map

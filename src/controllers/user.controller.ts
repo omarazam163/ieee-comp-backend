@@ -3,24 +3,16 @@ import { Iuser } from "../models/user.model";
 import { validationResult } from "express-validator";
 import { client,apiKey } from "../models/prismaClient";
 import Jwt from "jsonwebtoken";
-
+import {validateResult} from "../helpers/validateResult"
 let AddNewUser = async (req: Request, res: Response) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    res.status(400).json({ status: 400,errors: errors.array()[0].msg }).send();
-  } else {
-    let newUser: Iuser = req.body;
-    await client.user.create({ data: newUser });
-    res.status(200).json({ status: 200, message: "success" }).send();
-  }
+  if (!validateResult(req, res)) return;
+  let newUser: Iuser = req.body;
+  await client.user.create({ data: newUser });
+  res.status(200).json({ status: 200, message: "success" }).send();
 };
 
 let SignIn = async (req: Request, res: Response) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    res.status(400).json({ status: 400, errors: errors.array()[0].msg }).send();
-    return;
-  }
+  if (!validateResult(req, res)) return;
   let user = await client.user.findFirst({
     where: {
       email: req.body.email,
@@ -49,7 +41,10 @@ let SignIn = async (req: Request, res: Response) => {
   }
 };
 
-let upddateScore = async (req: Request, res: Response) => {
+
+
+let updateScore = async (req: Request, res: Response) => {
+  if (!validateResult(req, res)) return;
   await client.user.update({
     where: {
       id: req.body.user.id,
@@ -62,7 +57,10 @@ let upddateScore = async (req: Request, res: Response) => {
   res.status(200).json({ status: 200, message: "success" }).send();
 };
 
+
+
 let GetUserScore = async (req: Request, res: Response) => {
+  if (!validateResult(req, res)) return;
   if (req.params["id"]) {
     let user: any = await client.$queryRaw`select * from (
                     select "lastUpdated","score","userName","id","name",
@@ -90,9 +88,17 @@ let GetUserScore = async (req: Request, res: Response) => {
   }
 };
 
+
+
+
+let AddUserDate = async (req: Request, res: Response) => {
+  
+}
+
+
 export const userController = {
   AddNewUser,
   SignIn,
-  upddateScore,
+  updateScore,
   GetUserScore,
 };

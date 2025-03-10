@@ -13,26 +13,19 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.userController = void 0;
-const express_validator_1 = require("express-validator");
 const prismaClient_1 = require("../models/prismaClient");
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+const validateResult_1 = require("../helpers/validateResult");
 let AddNewUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const errors = (0, express_validator_1.validationResult)(req);
-    if (!errors.isEmpty()) {
-        res.status(400).json({ status: 400, errors: errors.array()[0].msg }).send();
-    }
-    else {
-        let newUser = req.body;
-        yield prismaClient_1.client.user.create({ data: newUser });
-        res.status(200).json({ status: 200, message: "success" }).send();
-    }
+    if (!(0, validateResult_1.validateResult)(req, res))
+        return;
+    let newUser = req.body;
+    yield prismaClient_1.client.user.create({ data: newUser });
+    res.status(200).json({ status: 200, message: "success" }).send();
 });
 let SignIn = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const errors = (0, express_validator_1.validationResult)(req);
-    if (!errors.isEmpty()) {
-        res.status(400).json({ status: 400, errors: errors.array()[0].msg }).send();
+    if (!(0, validateResult_1.validateResult)(req, res))
         return;
-    }
     let user = yield prismaClient_1.client.user.findFirst({
         where: {
             email: req.body.email,
@@ -57,7 +50,9 @@ let SignIn = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         res.status(401).json({ status: 401, message: "unauthorized" }).send();
     }
 });
-let upddateScore = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+let updateScore = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    if (!(0, validateResult_1.validateResult)(req, res))
+        return;
     yield prismaClient_1.client.user.update({
         where: {
             id: req.body.user.id,
@@ -70,6 +65,8 @@ let upddateScore = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     res.status(200).json({ status: 200, message: "success" }).send();
 });
 let GetUserScore = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    if (!(0, validateResult_1.validateResult)(req, res))
+        return;
     if (req.params["id"]) {
         let user = yield prismaClient_1.client.$queryRaw `select * from (
                     select "lastUpdated","score","userName","id","name",
@@ -96,10 +93,12 @@ let GetUserScore = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         res.status(404).json({ status: 404, message: "not found" }).send();
     }
 });
+let AddUserDate = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+});
 exports.userController = {
     AddNewUser,
     SignIn,
-    upddateScore,
+    updateScore,
     GetUserScore,
 };
 //# sourceMappingURL=user.controller.js.map

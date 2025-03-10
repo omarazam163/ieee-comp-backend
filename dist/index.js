@@ -8,10 +8,12 @@ const express_1 = __importDefault(require("express"));
 const user_router_1 = require("./routers/user.router");
 const leaderBoard_router_1 = require("./routers/leaderBoard.router");
 const globalErrorHandler_1 = require("./helpers/globalErrorHandler");
+const calender_router_1 = require("./routers/calender.router");
 exports.App = (0, express_1.default)();
 exports.App.use(express_1.default.json());
 exports.App.use("/api/user", user_router_1.userRouter);
 exports.App.use("/api/leaderboard", leaderBoard_router_1.leaderBoaerdRouter);
+exports.App.use("/api/calender", calender_router_1.calenderRouter);
 const PORT = process.env.PORT || 3000;
 exports.App.get("/ping", (req, res) => {
     res.send("pong");
