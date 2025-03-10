@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "UserDays" ALTER COLUMN "endPage" SET DEFAULT 0,
+ALTER COLUMN "startPage" SET DEFAULT 0;

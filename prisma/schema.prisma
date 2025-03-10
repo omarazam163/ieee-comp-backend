@@ -38,11 +38,10 @@ model UserDays{
   userId String
   day Days @relation(fields: [DayId],references: [Date],onDelete:Cascade)
   DayId DateTime @db.Date
-  startPage Int 
-  endPage Int
+  startPage Int @default(0)
+  endPage Int @default(0)
   eveningAzkar Boolean @default(false)
   morningAzkar Boolean @default(false)
   @@id([userId,DayId])
 }
-
 

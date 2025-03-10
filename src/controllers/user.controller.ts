@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import { Iuser } from "../models/user.model";
-import { validationResult } from "express-validator";
 import { client,apiKey } from "../models/prismaClient";
 import Jwt from "jsonwebtoken";
 import {validateResult} from "../helpers/validateResult"
@@ -30,6 +29,7 @@ let SignIn = async (req: Request, res: Response) => {
       apiKey as string,
       {
         expiresIn: "4days",
+        
       }
     );
     res

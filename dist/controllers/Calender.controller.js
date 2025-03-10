@@ -86,5 +86,45 @@ const getAllUserDates = (req, res) => __awaiter(void 0, void 0, void 0, function
     });
     res.status(200).json(Days).send();
 });
-exports.calenderContoller = { AddCalenderDay: updateCalenderDay, getAllUserDates };
+const getSpecificDate = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log(req.body.date);
+    try {
+        const day = yield prismaClient_1.client.userDays.findUnique({
+            where: {
+                userId_DayId: {
+                    userId: req.body.user.id,
+                    DayId: new Date(req.body.date)
+                }
+            }
+        });
+        if (day)
+            res.status(200).json({ message: "success", data: day }).send();
+        else {
+            yield prismaClient_1.client.days.upsert({
+                where: {
+                    Date: new Date(req.body.date)
+                },
+                update: {},
+                create: {
+                    Date: new Date(req.body.date)
+                }
+            });
+            yield prismaClient_1.client.userDays.create({
+                data: {
+                    userId: req.body.user.id,
+                    DayId: new Date(req.body.date)
+                },
+            });
+            res.status(200).json({ message: "success", data: day });
+        }
+    }
+    catch (err) {
+        res.status(500).json({ status: 500, message: err.message }).send();
+    }
+});
+exports.calenderContoller = {
+    updateCalenderDay,
+    getAllUserDates,
+    getSpecificDate,
+};
 //# sourceMappingURL=Calender.controller.js.map

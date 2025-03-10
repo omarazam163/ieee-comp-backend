@@ -30,6 +30,8 @@ let updateCalenderDay = async (req: Request, res: Response) => {
       startPage: req.body.startPage,
     },
   });
+
+
   await client.user.update({
       where: {
         id:req.body.user.id
@@ -78,4 +80,49 @@ const getAllUserDates = async (req: Request, res: Response) => {
   res.status(200).json(Days).send();
 };
 
-export const calenderContoller = { AddCalenderDay: updateCalenderDay, getAllUserDates };
+const getSpecificDate = async (req: Request, res: Response) => {
+console.log(req.body.date)
+try{
+  const day = await client.userDays.findUnique({
+    where:{
+      userId_DayId: {
+        userId: req.body.user.id,
+        DayId: new Date(req.body.date)
+      }
+    }
+  })
+  if(day) res.status(200).json({message:"success",data:day}).send();
+  else{
+    await client.days.upsert({
+      where:{
+        Date:new Date(req.body.date)
+      },
+      update:{},
+      create:{
+        Date:new Date(req.body.date)
+      }
+    })
+
+    await client.userDays.create({
+      data: {
+        userId: req.body.user.id,
+        DayId:new Date(req.body.date)
+      },
+    });
+    res.status(200).json({ message: "success", data: day });
+  }
+}
+catch(err)
+{
+  res.status(500).json({ status: 500, message: err.message }).send();
+}
+};
+
+
+
+
+export const calenderContoller = {
+  updateCalenderDay,
+  getAllUserDates,
+  getSpecificDate,
+};
