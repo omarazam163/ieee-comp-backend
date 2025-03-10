@@ -68,7 +68,9 @@ const getAllUserDates = async (req: Request, res: Response) => {
             select:{
                 DayId:true,
                 startPage:true,
-                endPage:true
+                endPage:true,
+                eveningAzkar:true,
+                morningAzkar:true
             }
         }
     }

@@ -77,7 +77,9 @@ const getAllUserDates = (req, res) => __awaiter(void 0, void 0, void 0, function
                 select: {
                     DayId: true,
                     startPage: true,
-                    endPage: true
+                    endPage: true,
+                    eveningAzkar: true,
+                    morningAzkar: true
                 }
             }
         }
