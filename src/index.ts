@@ -3,9 +3,11 @@ import { userRouter } from "./routers/user.router";
 import { leaderBoaerdRouter } from "./routers/leaderBoard.router";
 import { GlobalErrorHandler } from "./helpers/globalErrorHandler";
 import { calenderRouter } from "./routers/calender.router";
+const cors = require("cors");
 export const App = express();
 
 App.use(express.json());
+App.use(cors());
 App.use("/api/user", userRouter);
 App.use("/api/leaderboard", leaderBoaerdRouter);
 App.use("/api/calender", calenderRouter);
@@ -23,3 +25,4 @@ App.listen(PORT, () => {
 });
 
 export default App;
+
