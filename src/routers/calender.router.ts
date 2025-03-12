@@ -36,12 +36,7 @@ calenderRouter.get(
 );
 
 calenderRouter.get(
-  "/getSpecificDate",
-  body("date")
-    .exists({ values: "falsy" })
-    .withMessage("date is required")
-    .isDate()
-    .withMessage("date is required"),
+  "/getSpecificDate/:date",
   verfiyToken,
   calenderContoller.getSpecificDate
 );

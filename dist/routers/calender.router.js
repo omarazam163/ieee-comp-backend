@@ -13,11 +13,7 @@ exports.calenderRouter.put("/updateQuraan", updateQuraan_1.CheckCalenderQuraan, 
 exports.calenderRouter.put("/updateAzkarMorning", updateMorning_1.CheckCalenderMorning, veriftToken_1.verfiyToken, Calender_controller_1.calenderContoller.updateAzkarMorning);
 exports.calenderRouter.put("/updateAzkarEvening", updateEvening_1.CheckCalenderEvening, veriftToken_1.verfiyToken, Calender_controller_1.calenderContoller.updateAzkarEvening);
 exports.calenderRouter.get("/getAllUserDates", veriftToken_1.verfiyToken, Calender_controller_1.calenderContoller.getAllUserDates);
-exports.calenderRouter.get("/getSpecificDate", (0, express_validator_1.body)("date")
-    .exists({ values: "falsy" })
-    .withMessage("date is required")
-    .isDate()
-    .withMessage("date is required"), veriftToken_1.verfiyToken, Calender_controller_1.calenderContoller.getSpecificDate);
+exports.calenderRouter.get("/getSpecificDate/:date", veriftToken_1.verfiyToken, Calender_controller_1.calenderContoller.getSpecificDate);
 exports.calenderRouter.patch("/updateBookMark", [
     (0, express_validator_1.body)("bookMark")
         .exists()

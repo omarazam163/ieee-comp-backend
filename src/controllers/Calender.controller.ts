@@ -135,8 +135,9 @@ const getAllUserDates = async (req: Request, res: Response) => {
 };
 
 const getSpecificDate = async (req: Request, res: Response) => {
+  const date = req.params.date;
   try {
-    let theDateNorm = new Date(req.body.date);
+    let theDateNorm = new Date(date);
     theDateNorm.setHours(12, 0, 0, 0);
     if (!validateResult(req, res)) return;
     const day = await client.userDays.findUnique({

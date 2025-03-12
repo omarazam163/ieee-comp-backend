@@ -146,8 +146,9 @@ const getAllUserDates = (req, res) => __awaiter(void 0, void 0, void 0, function
     res.status(200).json(Days).send();
 });
 const getSpecificDate = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const date = req.params.date;
     try {
-        let theDateNorm = new Date(req.body.date);
+        let theDateNorm = new Date(date);
         theDateNorm.setHours(12, 0, 0, 0);
         if (!(0, validateResult_1.validateResult)(req, res))
             return;
