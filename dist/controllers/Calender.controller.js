@@ -27,14 +27,11 @@ let updateDayQuraan = (req, res) => __awaiter(void 0, void 0, void 0, function* 
                 },
             },
             update: {
-                startPage: req.body.startPage,
-                endPage: req.body.endPage,
+                pageRead: req.body.numberOfPages,
             },
             create: {
                 userId: req.body.user.id,
                 DayId: theDateNorm,
-                endPage: req.body.endPage,
-                startPage: req.body.startPage,
             },
         });
         yield prismaClient_1.client.user.update({
@@ -139,8 +136,7 @@ const getAllUserDates = (req, res) => __awaiter(void 0, void 0, void 0, function
             UserDays: {
                 select: {
                     DayId: true,
-                    startPage: true,
-                    endPage: true,
+                    pageRead: true,
                     eveningAzkar: true,
                     morningAzkar: true,
                 },

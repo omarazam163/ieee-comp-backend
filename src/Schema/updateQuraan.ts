@@ -7,23 +7,10 @@ export const CheckCalenderQuraan = checkSchema({
     isDate: true,
     errorMessage: "date is required",
   },
-  startPage: {
+  numberOfPages: {
     exists: { options: { values: "falsy" } },
-    isInt: { options: { min: 1, max: 614 } },
-    errorMessage: "startPage is required",
+    isInt: { options: { min: 1, max: 604 } },
+    errorMessage: "numberOfPages is required",
   },
-  endPage: {
-    exists: { options: { values: "falsy" } },
-    isInt: { options: { min: 1, max: 614 } },
-    errorMessage: "endPage is required",
-    custom: {
-      options: (value: number, { req }) => {
-        if (value < req.body.startPage) {
-          throw new Error("endPage should be greater than startPage");
-        }
-        return true;
-      },
-    },
-  }
 });
 

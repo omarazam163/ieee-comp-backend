@@ -15,14 +15,11 @@ let updateDayQuraan = async (req: Request, res: Response) => {
         },
       },
       update: {
-        startPage: req.body.startPage,
-        endPage: req.body.endPage,
+        pageRead: req.body.numberOfPages,
       },
       create: {
         userId: req.body.user.id,
         DayId: theDateNorm,
-        endPage: req.body.endPage,
-        startPage: req.body.startPage,
       },
     });
     await client.user.update({
@@ -127,8 +124,7 @@ const getAllUserDates = async (req: Request, res: Response) => {
       UserDays: {
         select: {
           DayId: true,
-          startPage: true,
-          endPage: true,
+          pageRead: true,
           eveningAzkar: true,
           morningAzkar: true,
         },
