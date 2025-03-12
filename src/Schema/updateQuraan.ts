@@ -1,6 +1,7 @@
 import { check, checkSchema, Schema } from "express-validator";
 
-export const CheckCalender = checkSchema({
+// Update quraan shcema
+export const CheckCalenderQuraan = checkSchema({
   date: {
     exists: { options: { values: "falsy" } },
     isDate: true,
@@ -23,15 +24,6 @@ export const CheckCalender = checkSchema({
         return true;
       },
     },
-  },
-  morningAzkar: {
-    exists: { options: { values: "null" } },
-    isBoolean: true,
-    errorMessage: "morningAzkar is required",
-  },
-  eveningAzkar: {
-    exists: { options: { values: "null" } },
-    isBoolean: true,
-    errorMessage: "eveningAzkar is required",
-  },
+  }
 });
+

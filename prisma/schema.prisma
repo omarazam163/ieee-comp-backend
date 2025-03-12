@@ -25,6 +25,7 @@ model User{
   maxStreak Int @default(0)
   lastPage Int @default(1)
   readingRate Int @default(10)
+  bookMark Int @default(0)
 }
 
 model Days{

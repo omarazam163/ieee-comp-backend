@@ -1,8 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CheckCalender = void 0;
+exports.CheckCalenderQuraan = void 0;
 const express_validator_1 = require("express-validator");
-exports.CheckCalender = (0, express_validator_1.checkSchema)({
+// Update quraan shcema
+exports.CheckCalenderQuraan = (0, express_validator_1.checkSchema)({
     date: {
         exists: { options: { values: "falsy" } },
         isDate: true,
@@ -25,16 +26,6 @@ exports.CheckCalender = (0, express_validator_1.checkSchema)({
                 return true;
             },
         },
-    },
-    morningAzkar: {
-        exists: { options: { values: "null" } },
-        isBoolean: true,
-        errorMessage: "morningAzkar is required",
-    },
-    eveningAzkar: {
-        exists: { options: { values: "null" } },
-        isBoolean: true,
-        errorMessage: "eveningAzkar is required",
-    },
+    }
 });
-//# sourceMappingURL=calenderScema.js.map
+//# sourceMappingURL=updateQuraan.js.map
