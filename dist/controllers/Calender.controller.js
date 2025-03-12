@@ -73,7 +73,7 @@ let updateAzkarMorning = (req, res) => __awaiter(void 0, void 0, void 0, functio
             return;
         let theDateNorm = new Date(req.body.date);
         theDateNorm.setHours(12, 0, 0, 0);
-        DateExists(theDateNorm);
+        yield DateExists(theDateNorm);
         //adds the DayUser if not exist
         yield prismaClient_1.client.userDays.upsert({
             where: {
@@ -104,7 +104,7 @@ let updateAzkarEvening = (req, res) => __awaiter(void 0, void 0, void 0, functio
             return;
         let theDateNorm = new Date(req.body.date);
         theDateNorm.setHours(12, 0, 0, 0);
-        DateExists(theDateNorm);
+        yield DateExists(theDateNorm);
         //adds the DayUser if not exist
         yield prismaClient_1.client.userDays.upsert({
             where: {

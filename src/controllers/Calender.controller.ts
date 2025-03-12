@@ -61,7 +61,7 @@ let updateAzkarMorning = async (req: Request, res: Response) => {
     if (!validateResult(req, res)) return;
     let theDateNorm = new Date(req.body.date);
     theDateNorm.setHours(12, 0, 0, 0);
-    DateExists(theDateNorm);
+    await DateExists(theDateNorm);
 
     //adds the DayUser if not exist
     await client.userDays.upsert({
@@ -92,7 +92,7 @@ let updateAzkarEvening = async (req: Request, res: Response) => {
     if (!validateResult(req, res)) return;
     let theDateNorm = new Date(req.body.date);
     theDateNorm.setHours(12, 0, 0, 0);
-    DateExists(theDateNorm);
+    await DateExists(theDateNorm);
     //adds the DayUser if not exist
     await client.userDays.upsert({
       where: {
