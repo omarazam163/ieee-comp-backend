@@ -139,7 +139,6 @@ const getSpecificDate = async (req: Request, res: Response) => {
   try {
     let theDateNorm = new Date(date);
     theDateNorm.setHours(12, 0, 0, 0);
-    if (!validateResult(req, res)) return;
     const day = await client.userDays.findUnique({
       where: {
         userId_DayId: {
@@ -163,7 +162,7 @@ const getSpecificDate = async (req: Request, res: Response) => {
       const newDay = await client.userDays.create({
         data: {
           userId: req.body.user.id,
-          DayId: new Date(req.body.date),
+          DayId: theDateNorm,
         },
       });
       res.status(200).json({ message: "success", data: newDay });

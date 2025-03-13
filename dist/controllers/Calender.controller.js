@@ -150,8 +150,6 @@ const getSpecificDate = (req, res) => __awaiter(void 0, void 0, void 0, function
     try {
         let theDateNorm = new Date(date);
         theDateNorm.setHours(12, 0, 0, 0);
-        if (!(0, validateResult_1.validateResult)(req, res))
-            return;
         const day = yield prismaClient_1.client.userDays.findUnique({
             where: {
                 userId_DayId: {
@@ -175,7 +173,7 @@ const getSpecificDate = (req, res) => __awaiter(void 0, void 0, void 0, function
             const newDay = yield prismaClient_1.client.userDays.create({
                 data: {
                     userId: req.body.user.id,
-                    DayId: new Date(req.body.date),
+                    DayId: theDateNorm,
                 },
             });
             res.status(200).json({ message: "success", data: newDay });
